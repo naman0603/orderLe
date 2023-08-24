@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MyCartActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/progressBar"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btnPurchase"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="-3dp"
+        android:layout_marginBottom="25dp"
+        android:padding="16dp"/>
+
+    <Button
+        android:id="@+id/btnPurchase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="65dp"
+        android:text="Confirm Purchase"
+        android:backgroundTint="@color/darK_pink"
+        android:layout_alignParentBottom="true"
+        android:layout_marginVertical="22dp"/>
+    </RelativeLayout>
+</FrameLayout>

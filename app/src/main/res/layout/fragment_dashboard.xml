@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.DashboardFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:orientation="vertical">
+        <com.denzcoskun.imageslider.ImageSlider
+            android:layout_margin="10dp"
+            android:id="@+id/imgSlider"
+            android:layout_weight="0.3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:iss_period="1000"
+            app:iss_auto_cycle="true"
+            app:iss_corner_radius="20"
+
+           />
+        <ProgressBar
+            android:id="@+id/transparentProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="visible"
+            android:layout_gravity="center"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            android:id="@+id/recyclerView"
+            android:layout_margin="16dp"/>
+    </LinearLayout>
+</FrameLayout>

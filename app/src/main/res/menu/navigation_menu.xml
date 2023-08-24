@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/nav_dashboard"
+        android:title="Dashboard"
+        android:icon="@drawable/ic_home"/>
+
+    <item
+        android:id="@+id/nav_myOrders"
+        android:title="My Orders"
+        android:icon="@drawable/ic_myorders"/>
+
+    <item
+        android:id="@+id/nav_terms"
+        android:title="@string/terms_condition"
+        android:icon="@drawable/ic_terms"/>
+
+    <item
+        android:id="@+id/nav_contacts"
+        android:title="Contact Details"
+        android:icon="@drawable/ic_phone"/>
+
+    <item
+        android:id="@+id/nav_aboutUs"
+        android:title="About Us"
+        android:icon="@drawable/ic_about_us"/>
+
+    <item
+        android:id="@+id/nav_bank"
+        android:title="Bank Details"
+        android:icon="@drawable/ic_bank_detail"/>
+
+    <item
+        android:id="@+id/nav_vision"
+        android:title="Vision"
+        android:icon="@drawable/ic_vision"/>
+
+    <item
+        android:id="@+id/nav_notification"
+        android:title="Notification"
+        android:icon="@drawable/ic_notification"/>
+
+    <item
+        android:id="@+id/nav_change_pass"
+        android:title="Change Password"
+        android:icon="@drawable/ic_change_pass"/>
+
+
+    <item
+        android:id="@+id/nav_logout"
+        android:title="Logout"
+        android:icon="@drawable/ic_logout"/>
+
+
+
+</menu>

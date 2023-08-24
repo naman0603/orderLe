@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "665213931390",
+    "project_id": "authapi-cbb18",
+    "storage_bucket": "authapi-cbb18.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665213931390:android:52bc9ff951591ca7352d2f",
+        "android_client_info": {
+          "package_name": "com.example.authapiapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "665213931390-v66gbkh398mdoir1kceafrq0crn8tki8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQSwupn6uNDa3Gc4QDOsz5vhf6Ip57-ro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "665213931390-v66gbkh398mdoir1kceafrq0crn8tki8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665213931390:android:2ec8eac26387ba77352d2f",
+        "android_client_info": {
+          "package_name": "com.example.orderleapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "665213931390-v66gbkh398mdoir1kceafrq0crn8tki8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQSwupn6uNDa3Gc4QDOsz5vhf6Ip57-ro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "665213931390-v66gbkh398mdoir1kceafrq0crn8tki8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
