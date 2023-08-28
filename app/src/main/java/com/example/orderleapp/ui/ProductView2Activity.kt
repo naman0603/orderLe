@@ -13,11 +13,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.denzcoskun.imageslider.ImageSlider
-import com.denzcoskun.imageslider.constants.ScaleTypes
-import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.orderleapp.R
+import com.example.orderleapp.adapter.CustomViewPager
+import com.example.orderleapp.adapter.ImageViewPagerAdapter
 import com.example.orderleapp.api.GetProductDetailsApiApi
 import com.example.orderleapp.apiResponse.ProductApiResponse
 import com.example.orderleapp.dataModel.MyCartDataModel
@@ -210,7 +209,7 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
             binding.txtClientName.text = it.productName
             binding.txtCategory.text = it.categoryName
             binding.txtCharges.text = it.stoneCharge
-            if(it.productDescription != null){
+            if(it.productDescription != null && it.productDescription!="null"){
                 binding.txtDescription.text = it.productDescription
             }
             binding.txtWeight.text = it.productWeight.toString()+" gms"
@@ -230,46 +229,35 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
 
     private fun imageSlider(list: ProductApiResponse) {
         val imageUrls = ArrayList<String>()
-        val imglist = ArrayList<SlideModel>()
         if (list.productTypeBeans.size > 0) {
-            imglist.add(SlideModel(list.productPictureUrl + list.productPicture))
             imageUrls.add(list.productPictureUrl + list.productPicture)
             for (productTypeBean in list.productTypeBeans) {
-                imglist.add(SlideModel(list.productPictureUrl + productTypeBean.productImage))
                 imageUrls.add(list.productPictureUrl + productTypeBean.productImage)
             }
         } else {
             url = list.productPictureUrl + list.productPicture
-            imglist.add(SlideModel(url))
             imageUrls.add(url)
         }
         imgUrls = imageUrls
 
         val slider = binding.imageView
-        if(imglist.size > 1){
-            setupImageSlider(slider, imglist)
+        if(imgUrls.size > 1){
+            setupImageSlider(slider, imageUrls)
         }else{
             setUpImage()
         }
-
     }
 
     private fun setUpImage() {
         Glide.with(this).load(url).into(binding.imgView)
     }
 
-    private fun setupImageSlider(slider: ImageSlider, bannerList: List<SlideModel>) {
+    private fun setupImageSlider(slider: CustomViewPager, bannerList: ArrayList<String>) {
         binding.imgView.visibility = View.GONE
         slider.visibility = View.VISIBLE
 
-        slider.setImageList(bannerList)
-
-        slider.setItemClickListener(object : ItemClickListener {
-            override fun onItemSelected(position: Int) {
-                val imageURI = bannerList[position].imageUrl
-                sendURL(imageURI)
-            }
-        })
+        val pagerAdapter = ImageViewPagerAdapter(this, bannerList)
+        slider.adapter = pagerAdapter
     }
 
     private fun sendURL(uri: String?) {

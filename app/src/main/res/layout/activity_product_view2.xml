@@ -14,17 +14,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/frameLayout">
-            <com.denzcoskun.imageslider.ImageSlider
+
+            <com.example.orderleapp.adapter.CustomViewPager
                 android:id="@+id/imageView"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="32dp"
-                android:scrollIndicators="none"
                 />
+
 
             <ImageView
                 android:id="@+id/imgView"

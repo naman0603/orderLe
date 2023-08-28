@@ -44,7 +44,7 @@ class AboutUsFragment : Fragment() {
         val cmsApi = CMSApi(
             context = requireContext(),
             onSuccess = { cmsApiResponse ->
-               binding.textView.text =Html.fromHtml(cmsApiResponse[0].pageContent)
+               binding.textView.text =Html.fromHtml(cmsApiResponse[0].pageContent.trim())
                 binding.relativeLayout.visibility = View.GONE
             },
         )

@@ -42,7 +42,7 @@ class MyCartActivity : AppCompatActivity(),PaymentResultListener {
         binding = ActivityMyCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar!!.title = "My Cart"
+        supportActionBar!!.title = ""
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         tokenCollection()

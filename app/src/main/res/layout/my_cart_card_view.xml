@@ -8,7 +8,7 @@
     app:cardCornerRadius="16dp"
     app:cardElevation="12dp"
     android:id="@+id/cardView"
-    android:layout_margin="6dp"
+    android:layout_margin="8dp"
     android:padding="16dp"
     android:backgroundTint="@color/light_pink"
     >
@@ -36,14 +36,14 @@
             android:layout_height="25dp"
             android:layout_marginStart="8dp"
             android:text="Sample Text"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.57"
+            app:layout_constraintHorizontal_bias="0.50"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imgViewMyCart"
-            app:layout_constraintVertical_bias="0.135" />
+            app:layout_constraintVertical_bias="0.05" />
 
         <TextView
             android:id="@+id/textView2"
@@ -51,14 +51,14 @@
             android:layout_height="25dp"
             android:layout_marginStart="8dp"
             android:text="Weight approx"
-            android:textSize="14sp"
+            android:textSize="18sp"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.57"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintVertical_bias="0.42" />
 
         <TextView
             android:id="@+id/txtCartWeight"
@@ -66,42 +66,43 @@
             android:layout_height="25dp"
             android:layout_marginStart="8dp"
             android:text="..."
-            android:textSize="14sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.57"
+            app:layout_constraintHorizontal_bias="0.50"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.65" />
+            app:layout_constraintVertical_bias="0.62" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="100dp"
             android:layout_height="25dp"
-            android:text="Quantity"
+            android:text="QTY"
+            android:textStyle="bold"
             android:textAlignment="center"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.97"
+            app:layout_constraintHorizontal_bias="0.85"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.375" />
+            app:layout_constraintVertical_bias="0.15" />
 
         <TextView
             android:id="@+id/counter"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:background="@drawable/edittext_background"
             android:gravity="center"
             android:text="0"
-            android:textSize="24sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.885"
+            app:layout_constraintHorizontal_bias="0.8"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.601" />
+            app:layout_constraintVertical_bias="0.65" />
 
         <ImageView
             android:id="@+id/addCart"
@@ -110,10 +111,10 @@
             android:src="@drawable/ic_add_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.73"
+            app:layout_constraintHorizontal_bias="0.65"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.595" />
+            app:layout_constraintVertical_bias="0.62" />
 
         <ImageView
             android:id="@+id/subCart"
@@ -122,10 +123,10 @@
             android:src="@drawable/ic_sub"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.984"
+            app:layout_constraintHorizontal_bias="0.90"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.595" />
+            app:layout_constraintVertical_bias="0.62" />
 
         <ImageView
             android:layout_width="wrap_content"

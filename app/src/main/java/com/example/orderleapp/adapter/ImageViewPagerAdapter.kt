@@ -38,15 +38,13 @@ class ImageViewPagerAdapter(private val context: Context, private val imageUrls:
         }
 
         btnPrevious.setOnClickListener {
-            if (position > 0) {
-                (container as ViewPager).currentItem = position - 1
-            }
+            val newPosition = if (position > 0) (position - 1) else imageUrls.size - 1
+            (container as ViewPager).currentItem = newPosition
         }
 
         btnNext.setOnClickListener {
-            if (position < imageUrls.size - 1) {
-                (container as ViewPager).currentItem = position + 1
-            }
+            val newPosition = (position + 1) % imageUrls.size
+            (container as ViewPager).currentItem = newPosition
         }
         container.addView(itemView)
         return itemView
