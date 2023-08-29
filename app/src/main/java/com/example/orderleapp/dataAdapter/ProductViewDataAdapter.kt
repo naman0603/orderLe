@@ -138,7 +138,6 @@ class ProductViewDataAdapter(val context: Context, val model : ArrayList<Product
 
             CartCountReceiverHolder.sendCartCountChangedBroadcast(context)
 
-            Toast.makeText(context, "Item added to cart", Toast.LENGTH_SHORT).show()
         }
     }
 }

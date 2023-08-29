@@ -100,8 +100,6 @@ class DashboardFragment : Fragment() {
         val loginAccessToken = Pref.getValue(context, Config.PREF_LOGIN_ACCESS_TOKEN, "")
 
         getAllCategoryApi.getCategoryList(userId, code, caratId, loginAccessToken)
-
-
     }
 
 

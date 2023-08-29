@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.orderleapp.R
 import com.example.orderleapp.api.GetOrderDetailsApi
+import com.example.orderleapp.apiResponse.CategoryApiResponse
 import com.example.orderleapp.apiResponse.MyOrdersApiResponse
 import com.example.orderleapp.apiResponse.ProductApiResponse
 import com.example.orderleapp.dataAdapter.MyOrdersDetailsAdapter
@@ -34,11 +35,7 @@ class MyOrders2Activity : AppCompatActivity(),CartCountObserver {
         binding = ActivityMyOrders2Binding.inflate(layoutInflater)
         setContentView(binding.root)
         CartCountReceiverHolder.register(this)
-        val data = intent.getParcelableExtra<MyOrdersApiResponse>("Data")
-        supportActionBar!!.apply {
-            setDisplayHomeAsUpEnabled(true)
-            title = "${data?.requestNumber}"
-        }
+
         initView()
     }
 
@@ -102,6 +99,7 @@ class MyOrders2Activity : AppCompatActivity(),CartCountObserver {
 
 
     private fun initView() {
+        setActionBarFun()
         binding.pgBar.visibility = View.VISIBLE
         binding.recyclerView.layoutManager= LinearLayoutManager(this)
         dataAdapter= MyOrdersDetailsAdapter(this,model)
@@ -109,6 +107,27 @@ class MyOrders2Activity : AppCompatActivity(),CartCountObserver {
         addData()
 
     }
+
+    private fun setActionBarFun() {
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowCustomEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_back_button)
+            setCustomView(R.layout.custom_action_bar)
+            val customActionBarView = customView
+            val centerImage = customActionBarView.findViewById<ImageView>(R.id.center_image)
+            val leftText = customActionBarView.findViewById<TextView>(R.id.left_text)
+            val filterImgBtn = customActionBarView.findViewById<ImageView>(R.id.ic_filter)
+            leftText.visibility = View.VISIBLE
+            val data = intent.getParcelableExtra<MyOrdersApiResponse>("Data")
+
+            // Set your image resource
+            centerImage.setImageResource(R.drawable.ic_woman)
+            leftText.text = data?.requestNumber.toString()
+
+        }
+    }
+
 
     private fun addData() {
         val data = intent.getParcelableExtra<MyOrdersApiResponse>("Data")

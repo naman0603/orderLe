@@ -13,7 +13,11 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/frameLayout">
+            android:id="@+id/frameLayout"
+            android:background="@color/light_pink"
+            android:layout_margin="16dp"
+            style="@style/rounded_corner"
+            >
 
             <com.example.orderleapp.adapter.CustomViewPager
                 android:id="@+id/imageView"
@@ -21,21 +25,22 @@
                 android:layout_height="200dp"
                 />
 
-
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="32dp"/>
+                android:layout_marginBottom="32dp"
+                app:shapeAppearanceOverlay="@style/rounded_corner"
+                />
         </FrameLayout>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/frameLayout"
-
+        android:backgroundTint="@color/light_pink"
         app:cardCornerRadius="24dp"
         app:cardElevation="12dp"
         android:id="@+id/cardView"

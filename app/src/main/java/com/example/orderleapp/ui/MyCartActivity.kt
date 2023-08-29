@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.text.Html
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -42,8 +44,6 @@ class MyCartActivity : AppCompatActivity(),PaymentResultListener {
         binding = ActivityMyCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar!!.title = ""
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         tokenCollection()
         initView()
@@ -64,6 +64,7 @@ class MyCartActivity : AppCompatActivity(),PaymentResultListener {
     }
 
     private fun initView() {
+        setActionBarFun()
         sharedPreferences = getSharedPreferences("MyCartData", MODE_PRIVATE)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         dataAdapter = MyCartDataAdapter(this, model)
@@ -83,6 +84,20 @@ class MyCartActivity : AppCompatActivity(),PaymentResultListener {
             }
         }
     }
+
+    private fun setActionBarFun() {
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowCustomEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_back_button)
+            setCustomView(R.layout.custom_action_bar)
+            val customActionBarView = customView
+            val centerImage = customActionBarView.findViewById<ImageView>(R.id.center_image)
+            val leftText = customActionBarView.findViewById<TextView>(R.id.left_text)
+            centerImage.setImageResource(R.drawable.ic_woman)
+        }
+    }
+
     private fun popUpEmpty() {
         val builder = AlertDialog.Builder(this,R.style.AlertDialogTheme)
         //set title for alert dialog

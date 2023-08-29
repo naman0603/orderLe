@@ -1,14 +1,24 @@
 package com.example.orderleapp.api
 
 
+import android.app.Activity
+import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.orderleapp.R
 import com.example.orderleapp.apiResponse.ProductApiResponse
+import com.example.orderleapp.auth.LoginActivity
 import com.example.orderleapp.dataModel.ProductDetailBean
 import com.example.orderleapp.dataModel.ProductTypeBean
+import com.example.orderleapp.`object`.Flags
 import com.example.orderleapp.util.Config
 import com.example.orderleapp.util.Pref
 import org.json.JSONArray
@@ -162,10 +172,47 @@ class GetProductDetailsApiApi(
                     Log.d("productApiResponse",productApiResponse.toString())
                     return productApiResponse
                 }
+            }else if (errorCode == 4){
+                popUp()
             }
         }catch (e:Exception){
             Log.e("Parsing Error", "Error parsing JSON response: ${e.message}")
         }
         return null
     }
+    private fun popUp() {
+        val dialogBinding = LayoutInflater.from(context).inflate(R.layout.card_view_user_exist,null)
+        val builder = Dialog(context)
+
+        val userName =  Pref.getValue(context, Config.PREF_USERNAME, "")
+        builder.setContentView(dialogBinding)
+        if(userName!=""){
+
+            val txtName : TextView = builder.findViewById(R.id.txtName)
+            txtName.visibility = View.VISIBLE
+            txtName.text = userName
+
+        }
+        val logOut : TextView = builder.findViewById(R.id.txtOk)
+        logOut.setOnClickListener {
+            Flags.init(context)
+            context.startActivity(Intent(context, LoginActivity::class.java))
+            if (context is Activity) {
+                context.finish() // Finish the activity if the context is an instance of Activity
+            }
+            Flags.myFlag = false
+            builder.dismiss()
+        }
+
+        builder.setContentView(dialogBinding)
+        builder.window?.setBackgroundDrawable(
+            ContextCompat.getDrawable(
+                context,
+                R.drawable.popup_sell_bg
+            )
+        )
+
+        builder.show()
+    }
+
 }

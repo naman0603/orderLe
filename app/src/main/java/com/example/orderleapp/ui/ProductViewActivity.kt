@@ -8,9 +8,11 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,11 +42,6 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
         binding = ActivityProductViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
         CartCountReceiverHolder.register(this)
-        val data = intent.getParcelableExtra<CategoryApiResponse>("Data")
-        supportActionBar!!.apply {
-            setDisplayHomeAsUpEnabled(true)
-            title = "${data?.categoryTitle}"
-        }
 
         initView()
         onClicks()
@@ -146,6 +143,7 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initView() {
+        setActionBarFun()
         binding.relativeLayout.visibility = View.VISIBLE
         binding.recyclerView.layoutManager= GridLayoutManager(this,2)
         dataAdapterList= ProductViewListDataAdapter(this,modelList)
@@ -158,6 +156,49 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
             startActivity(Intent(this, ProductViewActivity2::class.java))
         }
 
+
+    }
+
+    private fun setActionBarFun() {
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowCustomEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_back_button)
+            setCustomView(R.layout.custom_action_bar)
+            val customActionBarView = customView
+            val centerImage = customActionBarView.findViewById<ImageView>(R.id.center_image)
+            val leftText = customActionBarView.findViewById<TextView>(R.id.left_text)
+            val filterImgBtn = customActionBarView.findViewById<ImageView>(R.id.ic_filter)
+            leftText.visibility = View.VISIBLE
+            filterImgBtn.visibility = View.VISIBLE
+            val data = intent.getParcelableExtra<CategoryApiResponse>("Data")
+
+            // Set your image resource
+            centerImage.setImageResource(R.drawable.ic_woman)
+            leftText.text = data?.categoryTitle.toString()
+            filterImgBtn.setImageResource(R.drawable.ic_filter)
+
+            filterImgBtn.setOnClickListener {
+                popUp()
+            }
+
+        }
+    }
+
+    private fun popUp() {
+        val data = arrayOf("All") // Your data items
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
+
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setTitle("Select an Item")
+        dialogBuilder.setAdapter(adapter) { dialog, which ->
+            val selectedItem = data[which]
+            initView()
+            dialog.dismiss()
+        }
+
+        val dialog = dialogBuilder.create()
+        dialog.show()
 
     }
 

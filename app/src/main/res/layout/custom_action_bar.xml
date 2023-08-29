@@ -1,12 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
+
     <ImageView
+        android:id="@+id/center_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_woman"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:layout_toStartOf="@id/left_text"
+        />
 
+    <TextView
+        android:id="@+id/left_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_centerInParent="true"
+       />
+
+    <ImageView
+        android:id="@+id/ic_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="5dp"
+        android:visibility="gone"
+        />
 </RelativeLayout>

@@ -44,9 +44,7 @@ class HomeActivity : AppCompatActivity(),CartCountObserver {
 
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
-            displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-            setDisplayShowCustomEnabled(true)
-            setCustomView(R.layout.custom_action_bar)
+            title =""
         }
         if(savedInstanceState == null){
             replaceFragment(DashboardFragment(),0)
@@ -106,7 +104,26 @@ class HomeActivity : AppCompatActivity(),CartCountObserver {
     private fun initView() {
         setDrawer()
         onClick()
+        setActionBarFun()
     }
+
+    private fun setActionBarFun() {
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowCustomEnabled(true)
+            setCustomView(R.layout.custom_action_bar)
+            val customActionBarView = customView
+            val centerImage = customActionBarView.findViewById<ImageView>(R.id.center_image)
+            val leftText = customActionBarView.findViewById<TextView>(R.id.left_text)
+
+            // Set your image resource
+            centerImage.setImageResource(R.drawable.ic_woman)
+
+            // Set your text
+
+        }
+    }
+
     private fun setDrawer() {
         val drawerLayout = binding.drawerLayout
         actionBarDrawerToggle = object :ActionBarDrawerToggle(this

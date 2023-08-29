@@ -2,8 +2,11 @@ package com.example.orderleapp.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.orderleapp.R
 import com.example.orderleapp.databinding.ActivityImageViewBinding
 import com.example.orderleapp.adapter.CustomViewPager
 import com.example.orderleapp.adapter.ImageViewPagerAdapter
@@ -15,14 +18,11 @@ class ImageViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityImageViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar!!.apply {
-            setDisplayHomeAsUpEnabled(true)
-            title = ""
-        }
         initView()
     }
 
     private fun initView() {
+        setActionBarFun()
         if(intent.hasExtra("URIs")){
             val imageUrls: ArrayList<String> = intent.getStringArrayListExtra("URIs") ?: ArrayList()
             sendData(imageUrls)
@@ -35,6 +35,19 @@ class ImageViewActivity : AppCompatActivity() {
             binding.pgBar.visibility = View.GONE
         }
     }
+    private fun setActionBarFun() {
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowCustomEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_back_button)
+            setCustomView(R.layout.custom_action_bar)
+            val customActionBarView = customView
+            val centerImage = customActionBarView.findViewById<ImageView>(R.id.center_image)
+            val leftText = customActionBarView.findViewById<TextView>(R.id.left_text)
+            centerImage.setImageResource(R.drawable.ic_woman)
+        }
+    }
+
 
     private fun sendData(imageUrls: ArrayList<String>) {
         val viewPager: CustomViewPager = binding.viewPager

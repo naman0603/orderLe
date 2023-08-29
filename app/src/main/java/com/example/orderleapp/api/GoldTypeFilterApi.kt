@@ -1,6 +1,5 @@
 package com.example.orderleapp.api
 
-
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
@@ -23,25 +22,24 @@ import com.example.orderleapp.util.Pref
 import org.json.JSONException
 import org.json.JSONObject
 
-class GetProductApi(
+class GoldTypeFilterApi(
     private val context: Context,
     private val onSuccess: (List<ProductApiResponse>) -> Unit,
 ) {
 
-    fun getProductList(
+    fun goldTypeFilterApi(
         categoryId: Int,
-        offset: Int,
+        goldTypeId: Int,
         userId: String,
         code: String,
         loginAccessToken: String,
         caratId: Int,
     ) {
-        val url = Config.API_GET_PRODUCT
-
+        val url = Config.API_GOLD_TYPE_FILTER
 
         val params = HashMap<String, String>()
         params["category_id"] = categoryId.toString()
-        params["offset"] = offset.toString()
+        params["gold_type_id"] = goldTypeId.toString()
         params["user_id"] = userId
         params["code"] = code
         params["login_access_token"] = loginAccessToken
@@ -81,11 +79,9 @@ class GetProductApi(
         }
         val productBeanArrayList: MutableList<ProductApiResponse> = mutableListOf()
 
-
         val errorCode = jsonObj.optInt("error_code")
         val status = jsonObj.optBoolean("success")
         val mesg = jsonObj.optString("message")
-
 
         Log.d("parseApiResponse", "errorCode: $errorCode, status: $status, message :$mesg")
 
@@ -136,7 +132,7 @@ class GetProductApi(
                             ArrayList(), // Empty list of ProductTypeBean
                             ArrayList() // Empty list of ProductDetailBean
                         )
-                       Log.d("productBeanArrayList",productApiResponse.productId.toString())
+                        Log.d("productBeanArrayList",productApiResponse.productId.toString())
                         if (jsonObject.has("product_images")) {
                             val productTypeBeanArrayList = ArrayList<ProductTypeBean>()
                             val productjsonArray = jsonObject.getJSONArray("product_images")
@@ -164,22 +160,6 @@ class GetProductApi(
                         }
                         productBeanArrayList.add(productApiResponse)
                     }
-                }
-                val jsonProductObject = jsonDataObject.optJSONObject("product_form_details")
-                jsonProductObject?.let {
-                    Pref.setValue(context, Config.PREF_PRODUCT_CATEGORY, it.optString("product_category"))
-                    Pref.setValue(context, Config.PREF_PRODUCT_GOLD_TYPE, it.optString("gold_type"))
-                    Pref.setValue(context, Config.PREF_PRODUCT_CARAT_ID, it.optString("carat_id"))
-                    Pref.setValue(context, Config.PREF_PRODUCT_NAME, it.optString("product_name"))
-                    Pref.setValue(context, Config.PREF_PRODUCT_ITEM_CODE, it.optString("item_code"))
-                    Pref.setValue(context, Config.PREF_PRODUCT_SORT_ORDER, it.optString("sort_order"))
-                    Pref.setValue(context, Config.PREF_PRODUCT_PICTURE, it.optString("main_product_picture"))
-                    Pref.setValue(context, Config.PREF_PRODUCT_WEIGHT, it.optString("product_weight"))
-                    Pref.setValue(context, Config.PREF_PRODUCT_DESCRIPTION, it.optString("product_description"))
-                    Pref.setValue(context, Config.PREF_PRODUCT_SHORT_DESCRIPTION, it.optString("short_description"))
-                    Pref.setValue(context, Config.PREF_PRODUCT_SIZE, it.optString("has_size"))
-                    Pref.setValue(context, Config.PREF_PRODUCT_WASTAGE, it.optString("wastage"))
-                    Pref.setValue(context, Config.PREF_PRODUCT_STONE, it.optString("has_stone"))
                 }
             }
         }else if (errorCode == 4){
@@ -218,7 +198,6 @@ class GetProductApi(
                 R.drawable.popup_sell_bg
             )
         )
-
         builder.show()
     }
 }

@@ -10,13 +10,14 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/btnPrevious"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_left_arrow"
                 android:layout_gravity="center"
                 android:visibility="gone"
+
                 />
 
             <com.github.chrisbanes.photoview.PhotoView
@@ -24,7 +25,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-
                 />
 
             <ImageView

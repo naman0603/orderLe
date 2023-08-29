@@ -13,7 +13,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.denzcoskun.imageslider.models.SlideModel
 import com.example.orderleapp.R
 import com.example.orderleapp.adapter.CustomViewPager
 import com.example.orderleapp.adapter.ImageViewPagerAdapter
@@ -36,16 +35,13 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
     var url : String = ""
     private lateinit var progressView: View
     private var imgUrls = ArrayList<String>()
-
-
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductView2Binding.inflate(layoutInflater)
         setContentView(binding.root)
         CartCountReceiverHolder.register(this)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = ""
+
 
         progressView = layoutInflater.inflate(R.layout.layout_custom_progress, null)
         progressView.visibility = View.GONE
@@ -53,7 +49,6 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
 
         initView()
         onClickListeners()
-
     }
 
     override fun onDestroy() {
@@ -197,10 +192,30 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
     }
 
     private fun initView() {
+        setActionBarFun()
         progressView.visibility = View.VISIBLE
         selectedProduct = DataHolder.getProductApiResponse()
         fetchProducts(this)
     }
+
+    private fun setActionBarFun() {
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowCustomEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_back_button)
+            setCustomView(R.layout.custom_action_bar)
+            val customActionBarView = customView
+            val centerImage = customActionBarView.findViewById<ImageView>(R.id.center_image)
+            val leftText = customActionBarView.findViewById<TextView>(R.id.left_text)
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            // Set your image resource
+            centerImage.setImageResource(R.drawable.ic_woman)
+
+            // Set your text
+
+        }
+    }
+
 
     @SuppressLint("SetTextI18n")
     private fun fetchProducts(context: Context) {
@@ -213,9 +228,9 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
                 binding.txtDescription.text = it.productDescription
             }
             binding.txtWeight.text = it.productWeight.toString()+" gms"
+
             weight = it.productWeight.toString()
             imageSlider(it)
-            supportActionBar!!.title = it.productName
         }
         progressView.visibility = View.GONE
 
