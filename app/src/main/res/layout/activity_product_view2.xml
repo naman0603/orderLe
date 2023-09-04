@@ -64,6 +64,7 @@
                         android:padding="10dp"
                         android:textSize="18sp"
                         android:gravity="start"
+                        android:fontFamily="@font/avenir_heavy"
                         />
 
                     <TextView
@@ -75,7 +76,9 @@
                         android:padding="10dp"
                         android:text=""
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                         android:fontFamily="@font/avenir_light"
+                        />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -89,6 +92,7 @@
                         android:padding="10dp"
                         android:textSize="18sp"
                         android:gravity="start"
+                        android:fontFamily="@font/avenir_heavy"
                         />
 
                     <TextView
@@ -100,7 +104,9 @@
                         android:padding="10dp"
                         android:text=""
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:fontFamily="@font/avenir_light"
+                        />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -114,6 +120,8 @@
                         android:padding="10dp"
                         android:textSize="18sp"
                         android:gravity="start"
+                        android:fontFamily="@font/avenir_heavy"
+
                         />
 
                     <TextView
@@ -125,7 +133,10 @@
                         android:padding="10dp"
                         android:text=""
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:fontFamily="@font/avenir_light"
+
+                        />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -139,6 +150,8 @@
                         android:padding="10dp"
                         android:textSize="18sp"
                         android:gravity="start"
+                        android:fontFamily="@font/avenir_heavy"
+
                         />
 
                     <TextView
@@ -150,7 +163,9 @@
                         android:padding="10dp"
                         android:text=""
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:fontFamily="@font/avenir_light"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -166,6 +181,8 @@
                         android:padding="10dp"
                         android:textSize="18sp"
                         android:gravity="start"
+                        android:fontFamily="@font/avenir_heavy"
+
                         />
 
                     <TextView
@@ -177,7 +194,9 @@
                         android:padding="10dp"
                         android:text=""
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:fontFamily="@font/avenir_light"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -193,6 +212,8 @@
                         android:padding="10dp"
                         android:textSize="18sp"
                         android:gravity="start"
+                        android:fontFamily="@font/avenir_heavy"
+
                         />
 
                     <RelativeLayout
@@ -249,6 +270,7 @@
         android:layout_marginBottom="25dp"
         android:textColorHint="@color/white"
         android:layout_marginTop="14dp"
+        android:fontFamily="@font/avenir_heavy"
         android:layout_alignParentBottom="true"
         />
     </RelativeLayout>

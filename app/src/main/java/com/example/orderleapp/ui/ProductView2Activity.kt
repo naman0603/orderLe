@@ -208,10 +208,8 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
             val centerImage = customActionBarView.findViewById<ImageView>(R.id.center_image)
             val leftText = customActionBarView.findViewById<TextView>(R.id.left_text)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-            // Set your image resource
-            centerImage.setImageResource(R.drawable.ic_woman)
 
-            // Set your text
+            centerImage.setImageResource(R.drawable.ic_woman)
 
         }
     }

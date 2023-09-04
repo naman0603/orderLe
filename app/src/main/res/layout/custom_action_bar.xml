@@ -17,6 +17,7 @@
         android:layout_margin="2dp"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:fontFamily="@font/avenir_heavy"
         android:textColor="@color/black"
         android:layout_centerInParent="true"
        />

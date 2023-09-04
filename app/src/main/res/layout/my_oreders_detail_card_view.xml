@@ -32,12 +32,14 @@
                 android:layout_height="0dp"
                 android:layout_weight=".15"
                 android:textSize="18sp"
+                android:fontFamily="@font/avenir_heavy"
                 android:layout_marginTop="8dp"/>
 
             <TextView
                 android:id="@+id/txtWeightOrder"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:fontFamily="@font/avenir_light"
                 android:layout_weight=".15"
                 android:textSize="18sp" />
 
@@ -45,6 +47,7 @@
                 android:id="@+id/txtQuantity"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:fontFamily="@font/avenir_light"
                 android:layout_weight=".15"
                 android:textSize="18sp" />
 
@@ -52,6 +55,7 @@
                 android:id="@+id/txtGold"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:fontFamily="@font/avenir_light"
                 android:layout_weight=".15"
                 android:textSize="18sp"
                 android:layout_marginBottom="8dp"/>

@@ -21,7 +21,6 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.media.ExifInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -32,14 +31,10 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -115,29 +110,29 @@ public class Utils {
         if (cache == null) {
             cache = new Hashtable<String, Typeface>();
             cache.put("100", Typeface.createFromAsset(context.getAssets(),
-                    "fonts/Avenir-Black.ttf"));
+                    "font/avenir_black.ttf"));
             cache.put("200", Typeface.createFromAsset(context.getAssets(),
-                    "fonts/Avenir-BlackOblique.ttf"));
+                    "font/avenir_blackoblique.ttf"));
             cache.put("300", Typeface.createFromAsset(context.getAssets(),
-                    "fonts/Avenir-Book.ttf"));
+                    "font/avenir_book.ttf"));
             cache.put("400", Typeface.createFromAsset(context.getAssets(),
-                    "fonts/Avenir-BookOblique.ttf"));
+                    "font/avenir_bookoblique.ttf"));
             cache.put("500", Typeface.createFromAsset(context.getAssets(),
-                    "fonts/Avenir-Heavy.ttf"));
+                    "font/avenir_heavy.ttf"));
             cache.put("600", Typeface.createFromAsset(context.getAssets(),
-                    "fonts/Avenir-HeavyOblique.ttf"));
+                    "font/avenir_heavyoblique.ttf"));
             cache.put("700", Typeface.createFromAsset(context.getAssets(),
-                    "fonts/Avenir-Light.ttf"));
+                    "font/avenir_light.ttf"));
             cache.put("800", Typeface.createFromAsset(context.getAssets(),
-                    "fonts/Avenir-LightOblique.ttf"));
+                    "font/avenir_lightoblique.ttf"));
             cache.put("900", Typeface.createFromAsset(context.getAssets(),
-                    "fonts/Avenir-Medium.ttf"));
+                    "font/avenir_medium.ttf"));
             cache.put("1000", Typeface.createFromAsset(context.getAssets(),
-                    "fonts/Avenir-MediumOblique.ttf"));
+                    "font/avenir_mediumoblique.ttf"));
             cache.put("1100", Typeface.createFromAsset(context.getAssets(),
-                    "fonts/Avenir-Oblique.ttf"));
+                    "font/avenir_oblique.ttf"));
             cache.put("1200", Typeface.createFromAsset(context.getAssets(),
-                    "fonts/Avenir-Roman.ttf"));
+                    "font/avenir_roman.ttf"));
             cache.put("1300", Typeface.createFromAsset(context.getAssets(),
                     "fonts/fontawesome-webfont.ttf"));
         }

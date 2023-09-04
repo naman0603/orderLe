@@ -35,8 +35,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtItemNameListView"
                 android:hint="Client Name"
+                android:fontFamily="@font/avenir_heavy"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 android:layout_marginTop="14dp"
                 />
 
@@ -45,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtWeightListView"
                 android:hint="Client Name"
+                android:fontFamily="@font/avenir_light"
                 android:textSize="14sp"
                 />
 
@@ -52,6 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtChargeListView"
+                android:fontFamily="@font/avenir_light"
                 android:hint="Client Name"
                 android:textSize="14sp"
                 />
