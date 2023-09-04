@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +13,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.orderleapp.R
@@ -30,6 +33,8 @@ class MyOrders2Activity : AppCompatActivity(),CartCountObserver {
     private lateinit var binding: ActivityMyOrders2Binding
     private var model=java.util.ArrayList<ProductApiResponse>()
     private lateinit var dataAdapter: MyOrdersDetailsAdapter
+    private var backBtn : Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyOrders2Binding.inflate(layoutInflater)
@@ -142,7 +147,7 @@ class MyOrders2Activity : AppCompatActivity(),CartCountObserver {
             for (productApiResponse in productBeanArrayList) {
                 model.add(productApiResponse)
 
-                Log.d("Product Info", productApiResponse.productName) // Example usage
+                Log.d("Product Info", productApiResponse.invoiceFile) // Example usage
             }
             binding.txtOrderNo.text = "Order-$masterId"
             dataAdapter.notifyDataSetChanged()
@@ -159,5 +164,22 @@ class MyOrders2Activity : AppCompatActivity(),CartCountObserver {
     override fun onCartCountChanged() {
         invalidateOptionsMenu()
     }
+
+    override fun onBackPressed() {
+        if (backBtn >= 1) {
+            // If the back button is pressed more than once, close the application.
+            finishAffinity()
+        } else {
+            // If the back button is pressed for the first time, show a toast message.
+            Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
+            backBtn++
+
+            // Reset the count after a certain delay (e.g., 2 seconds).
+            Handler(Looper.getMainLooper()).postDelayed({
+                backBtn = 0
+            }, 4000)
+        }
+    }
+
 
 }

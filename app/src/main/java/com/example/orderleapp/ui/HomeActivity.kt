@@ -3,6 +3,8 @@ package com.example.orderleapp.ui
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -35,6 +37,8 @@ class HomeActivity : AppCompatActivity(),CartCountObserver {
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
+    private var backBtn : Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -252,4 +256,20 @@ class HomeActivity : AppCompatActivity(),CartCountObserver {
     override fun onCartCountChanged() {
         invalidateOptionsMenu()
     }
+    override fun onBackPressed() {
+        if (backBtn >= 1) {
+            // If the back button is pressed more than once, close the application.
+            finishAffinity()
+        } else {
+            // If the back button is pressed for the first time, show a toast message.
+            Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
+            backBtn++
+
+            // Reset the count after a certain delay (e.g., 2 seconds).
+            Handler(Looper.getMainLooper()).postDelayed({
+                backBtn = 0
+            }, 4000)
+        }
+    }
+
 }

@@ -6,6 +6,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Html
 import android.util.Log
 import android.view.View
@@ -37,6 +39,8 @@ class MyCartActivity : AppCompatActivity(),PaymentResultListener {
     private var token : String = ""
     lateinit var sb: StringBuilder
     private lateinit var progressView: View
+    private var backBtn : Int = 0
+
 
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -245,6 +249,22 @@ class MyCartActivity : AppCompatActivity(),PaymentResultListener {
 
     override fun onPaymentError(p0: Int, p1: String?) {
         Toast.makeText(this, "Payment Unsuccessful.\nPlease Try Again Later ", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onBackPressed() {
+        if (backBtn >= 1) {
+            // If the back button is pressed more than once, close the application.
+            finishAffinity()
+        } else {
+            // If the back button is pressed for the first time, show a toast message.
+            Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
+            backBtn++
+
+            // Reset the count after a certain delay (e.g., 2 seconds).
+            Handler(Looper.getMainLooper()).postDelayed({
+                backBtn = 0
+            }, 4000)
+        }
     }
 
 

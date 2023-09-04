@@ -1,6 +1,8 @@
 package com.example.orderleapp.ui
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,6 +15,8 @@ import com.example.orderleapp.adapter.ImageViewPagerAdapter
 
 class ImageViewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityImageViewBinding
+    private var backBtn : Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,4 +59,20 @@ class ImageViewActivity : AppCompatActivity() {
         viewPager.adapter = pagerAdapter
         binding.pgBar.visibility = View.GONE
     }
+    override fun onBackPressed() {
+        if (backBtn >= 1) {
+            // If the back button is pressed more than once, close the application.
+            finishAffinity()
+        } else {
+            // If the back button is pressed for the first time, show a toast message.
+            Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
+            backBtn++
+
+            // Reset the count after a certain delay (e.g., 2 seconds).
+            Handler(Looper.getMainLooper()).postDelayed({
+                backBtn = 0
+            }, 4000)
+        }
+    }
+
 }
