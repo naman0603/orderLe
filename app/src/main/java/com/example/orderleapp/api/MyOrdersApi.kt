@@ -120,7 +120,6 @@ class MyOrdersApi(private val context: Context, private val onSuccess: (List<MyO
                 R.drawable.popup_sell_bg
             )
         )
-
         builder.show()
     }
 

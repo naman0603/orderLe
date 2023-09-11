@@ -41,13 +41,11 @@ class MyCartActivity : AppCompatActivity(),PaymentResultListener {
     private lateinit var progressView: View
     private var backBtn : Int = 0
 
-
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         tokenCollection()
         initView()
@@ -260,7 +258,7 @@ class MyCartActivity : AppCompatActivity(),PaymentResultListener {
             Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
             backBtn++
 
-            // Reset the count after a certain delay (e.g., 2 seconds).
+            // Reset the count after a certain delay.
             Handler(Looper.getMainLooper()).postDelayed({
                 backBtn = 0
             }, 4000)

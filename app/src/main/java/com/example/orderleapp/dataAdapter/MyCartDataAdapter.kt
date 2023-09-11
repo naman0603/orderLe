@@ -73,7 +73,6 @@ RecyclerView.Adapter<MyCartViewHolder>(){
             popup(position)
         }
     }
-
     @SuppressLint("NotifyDataSetChanged")
     private fun popup(position: Int) {
         val cartDataModel = model.values.elementAt(position)
@@ -107,7 +106,6 @@ RecyclerView.Adapter<MyCartViewHolder>(){
         alertDialog.setCancelable(false)
         alertDialog.show()
     }
-
     private fun updateCounterInSharedPreferences(key: String, counter: Int) {
         val sharedPreferences = context.getSharedPreferences("MyCartData", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -119,5 +117,4 @@ RecyclerView.Adapter<MyCartViewHolder>(){
             editor.apply()
         }
     }
-
 }

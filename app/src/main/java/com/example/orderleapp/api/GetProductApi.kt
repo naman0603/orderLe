@@ -38,7 +38,6 @@ class GetProductApi(
     ) {
         val url = Config.API_GET_PRODUCT
 
-
         val params = HashMap<String, String>()
         params["category_id"] = categoryId.toString()
         params["offset"] = offset.toString()

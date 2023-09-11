@@ -30,6 +30,7 @@ import com.example.orderleapp.util.Pref
 
 @Suppress("DEPRECATION")
 class MyOrders2Activity : AppCompatActivity(),CartCountObserver {
+
     private lateinit var binding: ActivityMyOrders2Binding
     private var model=java.util.ArrayList<ProductApiResponse>()
     private lateinit var dataAdapter: MyOrdersDetailsAdapter

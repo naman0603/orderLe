@@ -53,6 +53,7 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
 
         initView()
         onClickListeners()
+
     }
 
     override fun onDestroy() {

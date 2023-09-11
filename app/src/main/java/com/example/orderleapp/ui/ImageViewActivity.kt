@@ -51,8 +51,6 @@ class ImageViewActivity : AppCompatActivity() {
             centerImage.setImageResource(R.drawable.ic_woman)
         }
     }
-
-
     private fun sendData(imageUrls: ArrayList<String>) {
         val viewPager: CustomViewPager = binding.viewPager
         val pagerAdapter = ImageViewPagerAdapter(this, imageUrls)

@@ -107,7 +107,7 @@ class CMSApi(
             Flags.init(context)
             context.startActivity(Intent(context, LoginActivity::class.java))
             if (context is Activity) {
-                context.finish() // Finish the activity if the context is an instance of Activity
+                context.finish()
             }
             Flags.myFlag = false
             builder.dismiss()

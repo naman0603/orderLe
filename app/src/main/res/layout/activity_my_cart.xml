@@ -20,8 +20,8 @@
         android:layout_above="@id/btnPurchase"
         android:layout_alignParentTop="true"
         android:layout_marginTop="-3dp"
-        android:layout_marginBottom="25dp"
-        android:padding="16dp"/>
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="6dp"/>
 
     <Button
         android:id="@+id/btnPurchase"
@@ -32,6 +32,6 @@
         android:backgroundTint="@color/darK_pink"
         android:fontFamily="@font/avenir_heavy"
         android:layout_alignParentBottom="true"
-        android:layout_marginVertical="22dp"/>
+        android:layout_marginBottom="22dp"/>
     </RelativeLayout>
 </FrameLayout>

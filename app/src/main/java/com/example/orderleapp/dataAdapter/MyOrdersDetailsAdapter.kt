@@ -51,6 +51,5 @@ class MyOrdersDetailsAdapter(private val context: Context, private var model : A
             intent.putExtra("URI", uri)
             context.startActivity(intent)
         }
-
     }
 }

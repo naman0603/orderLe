@@ -1,6 +1,5 @@
 package com.example.orderleapp.`interface`
 
-import com.example.orderleapp.apiResponse.BannerListApiResponse
 import com.example.orderleapp.apiResponse.LoginApiResponse
 import retrofit2.Call
 import retrofit2.http.Field
@@ -18,14 +17,5 @@ interface ApiService {
         @Field("device_token") deviceToken: String,
         @Field("device_type") deviceType: String
     ): Call<LoginApiResponse>
-
-    @FormUrlEncoded
-    @POST("getBanners")
-    fun bannerList(
-        @Field("user_id") user_id: String,
-        @Field("code") code: String,
-        @Field("login_access_token") login_access_token: String,
-
-    ): Call<BannerListApiResponse>
 
 }

@@ -39,7 +39,7 @@ public class Config {
     public static String IMAGE_CATEGORY_URL = IMAGE_URL + "/images/category_images/";*/
 
     //    Local server
-    public static String HOST = "http://200oksolutionsdemo.com";
+        public static String HOST = "http://200oksolutionsdemo.com";
     public static String API = HOST + "/order-le/app/v4";
     public static String IMAGE_URL = HOST + "/jyojewellery/app/plugins";
     public static String IMAGE_PRODUCTION_URL = IMAGE_URL + "/images/product_images/";

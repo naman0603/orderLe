@@ -23,9 +23,7 @@ import com.google.gson.Gson
 
 class ProductViewDataAdapter(val context: Context, val model : ArrayList<ProductApiResponse>):
     RecyclerView.Adapter<ProductViewViewHolder>(){
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var myCartDataModel: MyCartDataModel
-    private var counter : Int = 0
+
     var onItemClick: ((ProductApiResponse) -> Unit)? = null
 
 

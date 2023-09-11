@@ -156,11 +156,11 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
         binding.recyclerView.adapter=dataAdapter
 
         addData()
+
         dataAdapter.onItemClick = { productApiResponse ->
             DataHolder.setProductApiResponse(productApiResponse)
             startActivity(Intent(this, ProductViewActivity2::class.java))
         }
-
 
     }
 
@@ -195,7 +195,6 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
 
         val dialogBuilder = AlertDialog.Builder(this)
-        dialogBuilder.setTitle("Select an Item")
         dialogBuilder.setAdapter(adapter) { dialog, which ->
             val selectedItem = data[which]
             initView()
@@ -253,44 +252,7 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
         Log.d("fetchedProductList",fetchedProductList.toString())
         for (product in fetchedProductList) {
             // Extract all properties from the ProductApiResponse
-            modelList.add( ProductApiResponse(
-                product.id,
-                product.productId,
-                product.productCategoryId,
-                product.productName,
-                product.productDescription,
-                product.productPictureUrl,
-                product.productPicture,
-                product.productWeight,
-                product.createdDate,
-                product.wastage,
-                product.stoneCharge,
-                product.totalStoneCharge,
-                product.categoryTitle,
-                product.itemCode,
-                product.requestMasterId,
-                product.userId,
-                product.requestNumber,
-                product.productRequestId,
-                product.quantity,
-                product.partyName,
-                product.partyEmail,
-                product.partyPhone,
-                product.orderStatus,
-                product.invoiceFile,
-                product.qty,
-                product.productTotalWeight,
-                product.categoryName,
-                product.ringSize,
-                product.isChecked,
-                product.ringSizeArray,
-                product.orderDescription,
-                product.goldType,
-                product.goldTypeId,
-                product.goldCarat,
-                product.productTypeBeans,
-                product.productDetailBeans
-            ))
+            modelList.add( ProductApiResponse(product.id, product.productId, product.productCategoryId, product.productName, product.productDescription, product.productPictureUrl, product.productPicture, product.productWeight, product.createdDate, product.wastage, product.stoneCharge, product.totalStoneCharge, product.categoryTitle, product.itemCode, product.requestMasterId, product.userId, product.requestNumber, product.productRequestId, product.quantity, product.partyName, product.partyEmail, product.partyPhone, product.orderStatus, product.invoiceFile, product.qty, product.productTotalWeight, product.categoryName, product.ringSize, product.isChecked, product.ringSizeArray, product.orderDescription, product.goldType, product.goldTypeId, product.goldCarat, product.productTypeBeans, product.productDetailBeans))
         }
         dataAdapterList.notifyDataSetChanged()
         binding.relativeLayout.visibility = View.GONE
@@ -301,44 +263,7 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
         Log.d("fetchedProductList",fetchedProductList.toString())
         for (product in fetchedProductList) {
             // Extract all properties from the ProductApiResponse
-            model.add( ProductApiResponse(
-                product.id,
-                product.productId,
-                product.productCategoryId,
-                product.productName,
-                product.productDescription,
-                product.productPictureUrl,
-                product.productPicture,
-                product.productWeight,
-                product.createdDate,
-                product.wastage,
-                product.stoneCharge,
-                product.totalStoneCharge,
-                product.categoryTitle,
-                product.itemCode,
-                product.requestMasterId,
-                product.userId,
-                product.requestNumber,
-                product.productRequestId,
-                product.quantity,
-                product.partyName,
-                product.partyEmail,
-                product.partyPhone,
-                product.orderStatus,
-                product.invoiceFile,
-                product.qty,
-                product.productTotalWeight,
-                product.categoryName,
-                product.ringSize,
-                product.isChecked,
-                product.ringSizeArray,
-                product.orderDescription,
-                product.goldType,
-                product.goldTypeId,
-                product.goldCarat,
-                product.productTypeBeans,
-                product.productDetailBeans
-            ))
+            model.add( ProductApiResponse(product.id, product.productId, product.productCategoryId, product.productName, product.productDescription, product.productPictureUrl, product.productPicture, product.productWeight, product.createdDate, product.wastage, product.stoneCharge, product.totalStoneCharge, product.categoryTitle, product.itemCode, product.requestMasterId, product.userId, product.requestNumber, product.productRequestId, product.quantity, product.partyName, product.partyEmail, product.partyPhone, product.orderStatus, product.invoiceFile, product.qty, product.productTotalWeight, product.categoryName, product.ringSize, product.isChecked, product.ringSizeArray, product.orderDescription, product.goldType, product.goldTypeId, product.goldCarat, product.productTypeBeans, product.productDetailBeans))
         }
         dataAdapter.notifyDataSetChanged()
         binding.relativeLayout.visibility = View.GONE
