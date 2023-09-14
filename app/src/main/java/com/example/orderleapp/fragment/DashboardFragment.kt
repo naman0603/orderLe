@@ -127,6 +127,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun setupImageSlider(slider: ImageSlider, bannerList: List<SlideModel>) {
+
         slider.setImageList(bannerList, ScaleTypes.FIT)
         toggleProgressBarVisibility(false)
         slider.setItemClickListener(object : ItemClickListener {

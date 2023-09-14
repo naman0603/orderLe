@@ -28,6 +28,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
+import org.json.JSONObject
 
 class MyCartActivity : AppCompatActivity(),PaymentResultListener {
 
@@ -35,11 +36,12 @@ class MyCartActivity : AppCompatActivity(),PaymentResultListener {
     private val model = HashMap<String, MyCartDataModel>()
     private lateinit var dataAdapter: MyCartDataAdapter
     private lateinit var sharedPreferences: SharedPreferences
-    private var quantity : Int = 0
+    private var weight : Double = 0.0
     private var token : String = ""
     lateinit var sb: StringBuilder
     private lateinit var progressView: View
     private var backBtn : Int = 0
+
 
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,7 +81,6 @@ class MyCartActivity : AppCompatActivity(),PaymentResultListener {
         binding.btnPurchase.setOnClickListener {
             if (model.isNotEmpty()) {
                 popUp()
-                Checkout.preload(this)
             }
             else {
                 Toast.makeText(this, "Please Add Items to the Cart", Toast.LENGTH_SHORT).show()
@@ -128,7 +129,7 @@ class MyCartActivity : AppCompatActivity(),PaymentResultListener {
         //performing positive action
         builder.setPositiveButton("Confirm"){ _, _ ->
             progressView.visibility = View.VISIBLE
-            placeOrderApi()
+            setAmount()
         }
         //performing negative action
         builder.setNegativeButton("Deny"){ _, _ ->}
@@ -137,6 +138,20 @@ class MyCartActivity : AppCompatActivity(),PaymentResultListener {
         // Set other dialog properties
         alertDialog.setCancelable(false)
         alertDialog.show()
+    }
+
+    private fun setAmount() {
+        val gson = Gson()
+        val allEntries = sharedPreferences.all
+        for ((key, value) in allEntries) {
+            val cartDataJson = value as? String
+            if (cartDataJson != null) {
+                val myCartDataModel = gson.fromJson(cartDataJson, MyCartDataModel::class.java)
+                weight += (myCartDataModel!!.weight.toDouble()* myCartDataModel.counter.toDouble())
+            }
+        }
+        payments((weight*100).toInt())
+        Checkout.preload(this)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -193,8 +208,8 @@ class MyCartActivity : AppCompatActivity(),PaymentResultListener {
 
     }
 
-/*
     private fun payments(amount:Int){
+        binding.progressBar.visibility = View.GONE
         val checkOut = Checkout()
         checkOut.setKeyID("rzp_test_Zaw0kVOalIpz1n")
         try {
@@ -212,11 +227,11 @@ class MyCartActivity : AppCompatActivity(),PaymentResultListener {
 
             checkOut.open(this,options)
         }catch (e : Exception){
+            binding.progressBar.visibility = View.GONE
             Log.v("PaymentError",e.message.toString())
             Toast.makeText(this, "Error :"+e.message, Toast.LENGTH_LONG).show()
         }
     }
-*/
 
     @SuppressLint("NotifyDataSetChanged")
     private fun addData() {
@@ -235,17 +250,11 @@ class MyCartActivity : AppCompatActivity(),PaymentResultListener {
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onPaymentSuccess(p0: String?) {
-        Toast.makeText(this, "Thank You For Purchasing $quantity items using OrderLe ", Toast.LENGTH_SHORT).show()
-        model.clear()
-        val sharedPreferences = getSharedPreferences("MyCartData", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.clear()
-        editor.apply()
-
-        dataAdapter.notifyDataSetChanged()
+      placeOrderApi()
     }
 
     override fun onPaymentError(p0: Int, p1: String?) {
+        binding.progressBar.visibility = View.GONE
         Toast.makeText(this, "Payment Unsuccessful.\nPlease Try Again Later ", Toast.LENGTH_SHORT).show()
     }
 
@@ -264,6 +273,4 @@ class MyCartActivity : AppCompatActivity(),PaymentResultListener {
             }, 4000)
         }
     }
-
-
 }

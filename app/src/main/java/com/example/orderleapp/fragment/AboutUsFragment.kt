@@ -50,7 +50,6 @@ class AboutUsFragment : Fragment() {
         )
         cmsApi.getCMSData(userId, code, loginAccessToken, pageId)
     }
-
     override fun setArguments(args: Bundle?) {
         super.setArguments(args)
         if (args!!.containsKey("page_id")) {

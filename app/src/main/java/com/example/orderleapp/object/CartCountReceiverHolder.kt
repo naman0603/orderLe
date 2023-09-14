@@ -1,5 +1,6 @@
 package com.example.orderleapp.`object`
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -24,6 +25,7 @@ object CartCountReceiverHolder {
     }
 
     // Register the broadcast receiver
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     fun register(context: Context) {
         val intentFilter = IntentFilter(ACTION_CART_COUNT_CHANGED)
         context.registerReceiver(cartCountReceiver, intentFilter)

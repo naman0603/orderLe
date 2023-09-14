@@ -54,7 +54,6 @@ class ForgotPasswordFragment : Fragment() {
 
     private fun forgotPasswordApi() {
 
-
             val forgotPasswordApi = ForgotPasswordApi(requireContext()) { isSuccess ->
                 if (isSuccess) {
                     binding.pgBar.visibility = View.INVISIBLE

@@ -3,7 +3,6 @@ package com.example.orderleapp.dataAdapter
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import android.content.SharedPreferences
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -35,8 +34,8 @@ class ProductViewDataAdapter(val context: Context, val model : ArrayList<Product
 
     override fun onBindViewHolder(holder: ProductViewViewHolder, position: Int) {
 
-        val weight ="Weight approx :- " + model[position].productWeight +" gms"
         val charge = "Stone Charges :- " +"<b>₹ </b>"+ model[position].totalStoneCharge
+        val weight ="Weight approx :- " + model[position].productWeight +" gms"
         holder.itemView.findViewById<TextView>(R.id.txtWeight).text = Html.fromHtml(weight)
         holder.itemView.findViewById<TextView>(R.id.txtCharge).text = Html.fromHtml(charge)
         holder.itemView.findViewById<TextView>(R.id.txtItemName).text = model[position].productName
@@ -52,7 +51,7 @@ class ProductViewDataAdapter(val context: Context, val model : ArrayList<Product
             val counter =counterText.text.toString().toInt()
             val modelData = model[position]
             if (counter>0){
-                addToCart(counter,modelData)
+                addToCart(counter,modelData,model,holder,position)
                 counterText.text = "1"
             }else{
                 Toast.makeText(context, "Please Add Items", Toast.LENGTH_SHORT).show()
@@ -102,7 +101,13 @@ class ProductViewDataAdapter(val context: Context, val model : ArrayList<Product
         }
     }
 
-    private fun addToCart(counter: Int, modelData: ProductApiResponse) {
+    private fun addToCart(
+        counter: Int,
+        modelData: ProductApiResponse,
+        model: ArrayList<ProductApiResponse>,
+        holder: ProductViewViewHolder,
+        position: Int
+    ) {
         val sharedPreferences = context.getSharedPreferences("MyCartData", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
 
@@ -119,6 +124,9 @@ class ProductViewDataAdapter(val context: Context, val model : ArrayList<Product
             editor.putString(itemKey, updatedCartDataJson)
             editor.apply()
 
+            val weight ="Weight approx :- " + this.model[position].productWeight +" gms"
+            holder.itemView.findViewById<TextView>(R.id.txtWeight).text = Html.fromHtml(weight)
+
             Toast.makeText(context, "Quantity updated in cart", Toast.LENGTH_SHORT).show()
         } else {
             // If item does not exist, add it to the cart
@@ -133,7 +141,8 @@ class ProductViewDataAdapter(val context: Context, val model : ArrayList<Product
 
             editor.putString(itemKey, cartDataJson)
             editor.apply()
-
+            val weight ="Weight approx :- " + this.model[position].productWeight +" gms"
+            holder.itemView.findViewById<TextView>(R.id.txtWeight).text = Html.fromHtml(weight)
             CartCountReceiverHolder.sendCartCountChangedBroadcast(context)
 
         }
