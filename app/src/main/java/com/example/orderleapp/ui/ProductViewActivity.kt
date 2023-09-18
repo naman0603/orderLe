@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.orderleapp.MyApplication
 import com.example.orderleapp.R
 import com.example.orderleapp.api.GetProductApi
 import com.example.orderleapp.apiResponse.CategoryApiResponse
@@ -149,6 +150,9 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
     @SuppressLint("NotifyDataSetChanged")
     private fun initView() {
         setActionBarFun()
+        val dbHelper = MyApplication.databaseHelper
+        val productApiResponses = dbHelper.getAllProductApiResponses()
+        Log.d("DB_RESPONSE","$productApiResponses")
         binding.relativeLayout.visibility = View.VISIBLE
         binding.recyclerView.layoutManager= GridLayoutManager(this,2)
         dataAdapterList= ProductViewListDataAdapter(this,modelList)

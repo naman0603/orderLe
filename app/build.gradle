@@ -91,4 +91,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'org.greenrobot:eventbus:3.2.0'
 
+    // Animation
+    implementation ("com.airbnb.android:lottie:6.1.0")
+
+    // SQL Lite
+    implementation 'androidx.sqlite:sqlite-ktx:2.3.1'
+
 }

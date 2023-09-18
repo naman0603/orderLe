@@ -12,7 +12,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
+import com.example.orderleapp.MyApplication
 import com.example.orderleapp.R
 import com.example.orderleapp.apiResponse.ProductApiResponse
 import com.example.orderleapp.dataModel.MyCartDataModel
@@ -23,10 +25,8 @@ import com.google.gson.Gson
 
 class ProductViewListDataAdapter(val context: Context, val model : ArrayList<ProductApiResponse>):
     RecyclerView.Adapter<ProductViewListViewHolder>() {
-    private lateinit var sharedPreferences: SharedPreferences
-    private var counter: Int = 0
     var onItemClick: ((ProductApiResponse) -> Unit)? = null
-
+    var boolean: Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewListViewHolder {
         return ProductViewListViewHolder(
@@ -38,7 +38,7 @@ class ProductViewListDataAdapter(val context: Context, val model : ArrayList<Pro
     override fun getItemCount(): Int = model.size
 
     override fun onBindViewHolder(holder: ProductViewListViewHolder, position: Int) {
-
+        val animation = holder.itemView.findViewById<LottieAnimationView>(R.id.lottieAnimationList)
         val charge = "Stone Charges :- " + "<b>₹ </b>" + model[position].totalStoneCharge
         val weight = "Weight approx :- " + model[position].productWeight+" gms"
         holder.itemView.findViewById<TextView>(R.id.txtWeightListView).text = Html.fromHtml(weight)
@@ -48,6 +48,27 @@ class ProductViewListDataAdapter(val context: Context, val model : ArrayList<Pro
 
         Glide.with(context).load(model[position].productPictureUrl + model[position].productPicture)
             .into(holder.itemView.findViewById(R.id.imageViewListView))
+
+        animation.setOnClickListener {
+            if (boolean==0) {
+                animation.playAnimation()
+                boolean = 1
+                val dbHelper = MyApplication.databaseHelper
+                val id = dbHelper.insertProductApiResponse(model[position].productId,model[position].productName,model[position])
+                if(id!=-1L){
+                    Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
+                }
+            }else{
+                boolean = 0
+                animation.cancelAnimation()
+                animation.progress = 0f
+                val dbHelper = MyApplication.databaseHelper
+                val id = dbHelper.removeProductApiResponse(model[position].productId)
+                if(id>0){
+                    Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 
         holder.itemView.setOnClickListener {
             val item = model[position]
@@ -107,6 +128,7 @@ class ProductViewListDataAdapter(val context: Context, val model : ArrayList<Pro
             }
 
         }
+
 
     }
     private fun addToCart(

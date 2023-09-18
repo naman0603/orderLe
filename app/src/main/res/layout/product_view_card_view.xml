@@ -26,17 +26,31 @@
             app:shapeAppearanceOverlay="@style/rounded_corner"
             />
 
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
         <TextView
             android:id="@+id/txtItemName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="3dp"
             android:fontFamily="@font/avenir_heavy"
             android:text="Sample Text"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieAnimation"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                app:lottie_fileName="heart.json"
+                app:lottie_autoPlay="false"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
 
 
         <TextView
