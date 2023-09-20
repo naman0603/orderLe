@@ -29,6 +29,7 @@ import com.example.orderleapp.dataAdapter.ProductViewListDataAdapter
 import com.example.orderleapp.databinding.ActivityProductViewBinding
 import com.example.orderleapp.`interface`.CartCountObserver
 import com.example.orderleapp.`object`.CartCountReceiverHolder
+import com.example.orderleapp.`object`.ReinitializeFlagHolder
 import com.example.orderleapp.util.Config
 import com.example.orderleapp.util.Pref
 import com.example.orderleapp.viewModel.DataHolder
@@ -90,9 +91,19 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {
         super.onResume()
         invalidateOptionsMenu()
+        if (ReinitializeFlagHolder.shouldReinitialize) {
+            initView()
+            ReinitializeFlagHolder.shouldReinitialize = false // Reset the flag
+            model.clear()
+            modelList.clear()
+            dataAdapter.notifyDataSetChanged()
+            dataAdapterList.notifyDataSetChanged()
+        }
+
     }
     @SuppressLint("InflateParams")
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -196,10 +207,10 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
 
     private fun popUp() {
         val data = arrayOf("All") // Your data items
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, data)
 
         val dialogBuilder = AlertDialog.Builder(this)
-        dialogBuilder.setAdapter(adapter) { dialog, which ->
+        dialogBuilder.setSingleChoiceItems(adapter, -1) { dialog, which ->
             val selectedItem = data[which]
             initView()
             dialog.dismiss()
@@ -255,7 +266,6 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
     private fun setList(fetchedProductList: List<ProductApiResponse>) {
         Log.d("fetchedProductList",fetchedProductList.toString())
         for (product in fetchedProductList) {
-            // Extract all properties from the ProductApiResponse
             modelList.add( ProductApiResponse(product.id, product.productId, product.productCategoryId, product.productName, product.productDescription, product.productPictureUrl, product.productPicture, product.productWeight, product.createdDate, product.wastage, product.stoneCharge, product.totalStoneCharge, product.categoryTitle, product.itemCode, product.requestMasterId, product.userId, product.requestNumber, product.productRequestId, product.quantity, product.partyName, product.partyEmail, product.partyPhone, product.orderStatus, product.invoiceFile, product.qty, product.productTotalWeight, product.categoryName, product.ringSize, product.isChecked, product.ringSizeArray, product.orderDescription, product.goldType, product.goldTypeId, product.goldCarat, product.productTypeBeans, product.productDetailBeans))
         }
         dataAdapterList.notifyDataSetChanged()
@@ -265,8 +275,9 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
     @SuppressLint("NotifyDataSetChanged")
     private fun setGrid(fetchedProductList: List<ProductApiResponse>) {
         Log.d("fetchedProductList",fetchedProductList.toString())
+
         for (product in fetchedProductList) {
-            // Extract all properties from the ProductApiResponse
+
             model.add( ProductApiResponse(product.id, product.productId, product.productCategoryId, product.productName, product.productDescription, product.productPictureUrl, product.productPicture, product.productWeight, product.createdDate, product.wastage, product.stoneCharge, product.totalStoneCharge, product.categoryTitle, product.itemCode, product.requestMasterId, product.userId, product.requestNumber, product.productRequestId, product.quantity, product.partyName, product.partyEmail, product.partyPhone, product.orderStatus, product.invoiceFile, product.qty, product.productTotalWeight, product.categoryName, product.ringSize, product.isChecked, product.ringSizeArray, product.orderDescription, product.goldType, product.goldTypeId, product.goldCarat, product.productTypeBeans, product.productDetailBeans))
         }
         dataAdapter.notifyDataSetChanged()
@@ -284,7 +295,6 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
             // If the back button is pressed for the first time, show a toast message.
             Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
             backBtn++
-
             // Reset the count after a certain delay (e.g., 2 seconds).
             Handler(Looper.getMainLooper()).postDelayed({
                 backBtn = 0

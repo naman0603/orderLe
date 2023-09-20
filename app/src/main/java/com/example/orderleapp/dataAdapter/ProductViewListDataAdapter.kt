@@ -39,6 +39,15 @@ class ProductViewListDataAdapter(val context: Context, val model : ArrayList<Pro
 
     override fun onBindViewHolder(holder: ProductViewListViewHolder, position: Int) {
         val animation = holder.itemView.findViewById<LottieAnimationView>(R.id.lottieAnimationList)
+        val dbHelper = MyApplication.databaseHelper
+        val productApiResponses = dbHelper.getAllProductApiResponses()
+        for (response in productApiResponses){
+            if(response.productId == model[position].productId){
+                animation.playAnimation()
+                boolean = 1
+                break
+            }
+        }
         val charge = "Stone Charges :- " + "<b>₹ </b>" + model[position].totalStoneCharge
         val weight = "Weight approx :- " + model[position].productWeight+" gms"
         holder.itemView.findViewById<TextView>(R.id.txtWeightListView).text = Html.fromHtml(weight)
@@ -55,18 +64,12 @@ class ProductViewListDataAdapter(val context: Context, val model : ArrayList<Pro
                 boolean = 1
                 val dbHelper = MyApplication.databaseHelper
                 val id = dbHelper.insertProductApiResponse(model[position].productId,model[position].productName,model[position])
-                if(id!=-1L){
-                    Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
-                }
             }else{
                 boolean = 0
                 animation.cancelAnimation()
                 animation.progress = 0f
                 val dbHelper = MyApplication.databaseHelper
                 val id = dbHelper.removeProductApiResponse(model[position].productId)
-                if(id>0){
-                    Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show()
-                }
             }
         }
 

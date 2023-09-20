@@ -11,6 +11,10 @@
         android:id="@+id/nav_myOrders"
         android:title="My Orders"
         android:icon="@drawable/ic_myorders"/>
+    <item
+        android:id="@+id/nav_fav"
+        android:title="Favourites"
+        android:icon="@drawable/ic_heart"/>
 
     <item
         android:id="@+id/nav_terms"

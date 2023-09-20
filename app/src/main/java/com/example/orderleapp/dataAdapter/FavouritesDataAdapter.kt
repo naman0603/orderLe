@@ -1,7 +1,6 @@
 package com.example.orderleapp.dataAdapter
 
 import android.content.Context
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.text.Html
 import android.view.LayoutInflater
@@ -22,7 +21,7 @@ import com.example.orderleapp.ui.ImageViewActivity
 import com.example.orderleapp.viewHolder.ProductViewViewHolder
 import com.google.gson.Gson
 
-class ProductViewDataAdapter(val context: Context, val model : ArrayList<ProductApiResponse>):
+class FavouritesDataAdapter(val context: Context, val model : ArrayList<ProductApiResponse>):
     RecyclerView.Adapter<ProductViewViewHolder>(){
 
     var onItemClick: ((ProductApiResponse) -> Unit)? = null
@@ -36,35 +35,28 @@ class ProductViewDataAdapter(val context: Context, val model : ArrayList<Product
 
     override fun onBindViewHolder(holder: ProductViewViewHolder, position: Int) {
         val animation = holder.itemView.findViewById<LottieAnimationView>(R.id.lottieAnimation)
-        val dbHelper = MyApplication.databaseHelper
-        val productApiResponses = dbHelper.getAllProductApiResponses()
-        for (response in productApiResponses){
-            if(response.productId == model[position].productId){
-                animation.playAnimation()
-                boolean = 1
-                break
-            }
-        }
+        animation.playAnimation()
         val charge = "Stone Charges :- " +"<b>₹ </b>"+ model[position].totalStoneCharge
         val weight ="Weight approx :- " + model[position].productWeight +" gms"
         holder.itemView.findViewById<TextView>(R.id.txtWeight).text = Html.fromHtml(weight)
         holder.itemView.findViewById<TextView>(R.id.txtCharge).text = Html.fromHtml(charge)
         holder.itemView.findViewById<TextView>(R.id.txtItemName).text = model[position].productName
 
-        Glide.with(context).load(model[position].productPictureUrl+model[position].productPicture).into(holder.itemView.findViewById(R.id.imgPurchase))
+        Glide.with(context).load(model[position].productPictureUrl+model[position].productPicture).into(holder.itemView.findViewById(
+            R.id.imgPurchase))
 
         animation.setOnClickListener {
-            if (boolean==0) {
-                animation.playAnimation()
-                boolean = 1
-                val dbHelper = MyApplication.databaseHelper
-                val id = dbHelper.insertProductApiResponse(model[position].productId,model[position].productName,model[position])
-            }else{
-                boolean = 0
-                animation.cancelAnimation()
-                animation.progress = 0f
-                val dbHelper = MyApplication.databaseHelper
-                val id = dbHelper.removeProductApiResponse(model[position].productId)
+
+            animation.cancelAnimation()
+            animation.progress = 0f
+            val dbHelper = MyApplication.databaseHelper
+            val id = dbHelper.removeProductApiResponse(model[position].productId)
+            if (id > 0) {
+                // Remove the item from the model list
+                model.removeAt(position)
+                // Notify the adapter of the item removal
+                notifyItemRemoved(position)
+                notifyItemRangeChanged(position, itemCount) // Refresh the view
             }
         }
         holder.itemView.setOnClickListener {
@@ -133,7 +125,7 @@ class ProductViewDataAdapter(val context: Context, val model : ArrayList<Product
         holder: ProductViewViewHolder,
         position: Int
     ) {
-        val sharedPreferences = context.getSharedPreferences("MyCartData", MODE_PRIVATE)
+        val sharedPreferences = context.getSharedPreferences("MyCartData", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
 
         val itemKey = modelData.productId.toString()

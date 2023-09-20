@@ -24,6 +24,7 @@ import com.example.orderleapp.databinding.ActivityHomeBinding
 import com.example.orderleapp.fragment.AboutUsFragment
 import com.example.orderleapp.fragment.ChangePasswordFragment
 import com.example.orderleapp.fragment.DashboardFragment
+import com.example.orderleapp.fragment.FavouritesFragment
 import com.example.orderleapp.fragment.MyOrdersFragment
 import com.example.orderleapp.fragment.NotificationFragment
 import com.example.orderleapp.`interface`.CartCountObserver
@@ -103,6 +104,8 @@ class HomeActivity : AppCompatActivity(),CartCountObserver {
     override fun onResume() {
         super.onResume()
         invalidateOptionsMenu()
+
+
     }
 
     private fun initView() {
@@ -168,6 +171,12 @@ class HomeActivity : AppCompatActivity(),CartCountObserver {
                     binding.txtView.visibility = View.VISIBLE
                     binding.txtView.text = "Contacts"
                 }
+                R.id.nav_fav -> {
+                    replaceFragment(FavouritesFragment(),0)
+                    drawerLayout.closeDrawers()
+                    binding.txtView.visibility = View.GONE
+                }
+
                 R.id.nav_aboutUs -> {
                     replaceFragment(AboutUsFragment(),1)
                     drawerLayout.closeDrawers()

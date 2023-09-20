@@ -1,7 +1,5 @@
 package com.example.orderleapp.apiResponse
 
-import android.os.Parcel
-import android.os.Parcelable
 import com.example.orderleapp.dataModel.ProductDetailBean
 import com.example.orderleapp.dataModel.ProductTypeBean
 import com.google.gson.annotations.SerializedName

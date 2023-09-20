@@ -14,7 +14,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NavUtils
 import com.bumptech.glide.Glide
+import com.example.orderleapp.MyApplication
 import com.example.orderleapp.R
 import com.example.orderleapp.adapter.CustomViewPager
 import com.example.orderleapp.adapter.ImageViewPagerAdapter
@@ -24,6 +26,7 @@ import com.example.orderleapp.dataModel.MyCartDataModel
 import com.example.orderleapp.databinding.ActivityProductView2Binding
 import com.example.orderleapp.`interface`.CartCountObserver
 import com.example.orderleapp.`object`.CartCountReceiverHolder
+import com.example.orderleapp.`object`.ReinitializeFlagHolder
 import com.example.orderleapp.util.Config
 import com.example.orderleapp.util.Pref
 import com.example.orderleapp.viewModel.DataHolder
@@ -34,10 +37,13 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
     private lateinit var weight:String
     private var counter:Int = 0
     var selectedProduct : ProductApiResponse? = null
+    var productApi : ProductApiResponse? = null
     var url : String = ""
     private lateinit var progressView: View
     private var imgUrls = ArrayList<String>()
     private var backBtn : Int = 0
+    private var boolean: Int = 0
+
 
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -106,13 +112,37 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.action_cart){
-            startActivity(Intent(this,MyCartActivity::class.java))
-            return true
-        }else super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            R.id.action_cart -> {
+                startActivity(Intent(this,MyCartActivity::class.java))
+                return true
+            }
+            android.R.id.home -> {
+                ReinitializeFlagHolder.shouldReinitialize = true
+                NavUtils.navigateUpFromSameTask(this)
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
     @SuppressLint("SetTextI18n")
     private fun onClickListeners() {
+        val animation = binding.lottieAnimation
+
+        animation.setOnClickListener {
+            if (boolean==0) {
+                animation.playAnimation()
+                boolean = 1
+                val dbHelper = MyApplication.databaseHelper
+                val id = dbHelper.insertProductApiResponse(productApi!!.productId,productApi!!.productName,productApi!!)
+            }else{
+                boolean = 0
+                animation.cancelAnimation()
+                animation.progress = 0f
+                val dbHelper = MyApplication.databaseHelper
+                val id = dbHelper.removeProductApiResponse(productApi!!.productId)
+            }
+        }
 
         binding.add.setOnClickListener {
            val  counter = binding.txtCounter.text.toString().toInt()
@@ -223,6 +253,8 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
     private fun fetchProducts(context: Context) {
 
         val getProductDetailsApi = GetProductDetailsApiApi(context) {
+            val animation = binding.lottieAnimation
+            productApi = it
             binding.txtClientName.text = it.productName
             binding.txtCategory.text = it.categoryName
             binding.txtCharges.text = it.stoneCharge
@@ -230,7 +262,15 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
                 binding.txtDescription.text = it.productDescription
             }
             binding.txtWeight.text = it.productWeight.toString()+" gms"
-
+            val dbHelper = MyApplication.databaseHelper
+            val productApiResponses = dbHelper.getAllProductApiResponses()
+            for (response in productApiResponses){
+                if(response.productId == it.productId){
+                    animation.playAnimation()
+                    boolean = 1
+                    break
+                }
+            }
             weight = it.productWeight.toString()
             imageSlider(it)
         }
@@ -287,6 +327,7 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
         invalidateOptionsMenu()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (backBtn >= 1) {
             // If the back button is pressed more than once, close the application.
@@ -302,5 +343,6 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
             }, 4000)
         }
     }
+
 
 }
