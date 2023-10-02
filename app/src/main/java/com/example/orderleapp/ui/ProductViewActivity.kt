@@ -19,7 +19,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.orderleapp.MyApplication
 import com.example.orderleapp.R
 import com.example.orderleapp.api.GetProductApi
 import com.example.orderleapp.apiResponse.CategoryApiResponse
@@ -161,9 +160,6 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
     @SuppressLint("NotifyDataSetChanged")
     private fun initView() {
         setActionBarFun()
-        val dbHelper = MyApplication.databaseHelper
-        val productApiResponses = dbHelper.getAllProductApiResponses()
-        Log.d("DB_RESPONSE","$productApiResponses")
         binding.relativeLayout.visibility = View.VISIBLE
         binding.recyclerView.layoutManager= GridLayoutManager(this,2)
         dataAdapterList= ProductViewListDataAdapter(this,modelList)
@@ -235,8 +231,6 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
     fun fetchProducts(context: Context) {
         val data = intent.getParcelableExtra<CategoryApiResponse>("Data")
         val caratId = intent.getIntExtra("carat_id",0)
-
-
         val getProductApi = GetProductApi(context) { fetchedProductList ->
 
             if(fetchedProductList.isNotEmpty()){
@@ -245,13 +239,11 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
                 }else{
                     setList(fetchedProductList)
                 }
-
             }else{
                 Log.d("fetchedProductList","empty")
                 binding.relativeLayout1.visibility = View.VISIBLE
                 binding.txtEmpty.text = "No Products Available for ${data?.categoryTitle} !!"
             }
-
         }
         val categoryId = data?.categoryId
         val offset = 0 // Replace with the desired offset
@@ -259,9 +251,7 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
         val code = Pref.getValue(context, Config.PREF_CODE, "")
         val loginAccessToken = Pref.getValue(context, Config.PREF_LOGIN_ACCESS_TOKEN, "")
         getProductApi.getProductList(categoryId!!, offset, userId, code, loginAccessToken,caratId)
-
     }
-
     @SuppressLint("NotifyDataSetChanged")
     private fun setList(fetchedProductList: List<ProductApiResponse>) {
         Log.d("fetchedProductList",fetchedProductList.toString())
@@ -271,13 +261,11 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
         dataAdapterList.notifyDataSetChanged()
         binding.relativeLayout.visibility = View.GONE
     }
-
     @SuppressLint("NotifyDataSetChanged")
     private fun setGrid(fetchedProductList: List<ProductApiResponse>) {
         Log.d("fetchedProductList",fetchedProductList.toString())
 
         for (product in fetchedProductList) {
-
             model.add( ProductApiResponse(product.id, product.productId, product.productCategoryId, product.productName, product.productDescription, product.productPictureUrl, product.productPicture, product.productWeight, product.createdDate, product.wastage, product.stoneCharge, product.totalStoneCharge, product.categoryTitle, product.itemCode, product.requestMasterId, product.userId, product.requestNumber, product.productRequestId, product.quantity, product.partyName, product.partyEmail, product.partyPhone, product.orderStatus, product.invoiceFile, product.qty, product.productTotalWeight, product.categoryName, product.ringSize, product.isChecked, product.ringSizeArray, product.orderDescription, product.goldType, product.goldTypeId, product.goldCarat, product.productTypeBeans, product.productDetailBeans))
         }
         dataAdapter.notifyDataSetChanged()
@@ -287,19 +275,16 @@ class ProductViewActivity : AppCompatActivity(),CartCountObserver {
         invalidateOptionsMenu()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (backBtn >= 1) {
-            // If the back button is pressed more than once, close the application.
             finishAffinity()
         } else {
-            // If the back button is pressed for the first time, show a toast message.
             Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
             backBtn++
-            // Reset the count after a certain delay (e.g., 2 seconds).
             Handler(Looper.getMainLooper()).postDelayed({
                 backBtn = 0
             }, 4000)
         }
     }
-
 }

@@ -117,8 +117,8 @@ class GetOrderDetailsApi(
                                 jsonObject.optString("gold_type", ""),
                                 jsonObject.optInt("goldtype_id", 0),
                                 "",
-                                ArrayList<ProductTypeBean>(), // Empty list of ProductTypeBean
-                                ArrayList<ProductDetailBean>() // Empty list of ProductDetailBean
+                                ArrayList(), // Empty list of ProductTypeBean
+                                ArrayList() // Empty list of ProductDetailBean
                             )
 
                             Log.d("productApiResponse",productApiResponse.toString())

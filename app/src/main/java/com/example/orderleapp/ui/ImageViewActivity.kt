@@ -13,6 +13,7 @@ import com.example.orderleapp.databinding.ActivityImageViewBinding
 import com.example.orderleapp.adapter.CustomViewPager
 import com.example.orderleapp.adapter.ImageViewPagerAdapter
 
+@Suppress("OVERRIDE_DEPRECATION")
 class ImageViewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityImageViewBinding
     private var backBtn : Int = 0

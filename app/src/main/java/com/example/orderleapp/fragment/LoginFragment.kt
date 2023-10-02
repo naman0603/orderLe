@@ -27,7 +27,6 @@ class LoginFragment : Fragment() {
     private lateinit var txtUsername : EditText
     private lateinit var txtPassword : EditText
     private lateinit var sp : SharedPreferences
-    private var oldPass:String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         Flags.init(requireContext())
 

@@ -134,13 +134,13 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
                 animation.playAnimation()
                 boolean = 1
                 val dbHelper = MyApplication.databaseHelper
-                val id = dbHelper.insertProductApiResponse(productApi!!.productId,productApi!!.productName,productApi!!)
+                dbHelper.insertProductApiResponse(productApi!!.productId,productApi!!.productName,productApi!!)
             }else{
                 boolean = 0
                 animation.cancelAnimation()
                 animation.progress = 0f
                 val dbHelper = MyApplication.databaseHelper
-                val id = dbHelper.removeProductApiResponse(productApi!!.productId)
+                dbHelper.removeProductApiResponse(productApi!!.productId)
             }
         }
 
@@ -242,9 +242,7 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
             val centerImage = customActionBarView.findViewById<ImageView>(R.id.center_image)
             val leftText = customActionBarView.findViewById<TextView>(R.id.left_text)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
             centerImage.setImageResource(R.drawable.ic_woman)
-
         }
     }
 
@@ -258,7 +256,7 @@ class ProductViewActivity2 : AppCompatActivity(),CartCountObserver {
             binding.txtClientName.text = it.productName
             binding.txtCategory.text = it.categoryName
             binding.txtCharges.text = it.stoneCharge
-            if(it.productDescription != null && it.productDescription!="null"){
+            if(it.productDescription!="null"){
                 binding.txtDescription.text = it.productDescription
             }
             binding.txtWeight.text = it.productWeight.toString()+" gms"

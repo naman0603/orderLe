@@ -65,7 +65,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             val data = JSONObject(productData)
             Log.d("TAG_DATA",data.toString())
             val response = parseApiResponse(data)
-            //val productApiResponse = Gson().fromJson(productData, ProductApiResponse::class.java)
             productApiResponses.add(response!!)
         }
         cursor.close()
@@ -84,7 +83,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val productTypeBeans = parseProductTypeBeans(productTypeBeansArray)
         val ringSizeList = parseRingSizeArray(ringSizeArray)
 
-        val productApiResponse = ProductApiResponse(
+        return ProductApiResponse(
             id = jsonObject.optInt("id", 0),
             productId = jsonObject.optInt("product_id", 0),
             productCategoryId = jsonObject.optInt("product_category_id", 0),
@@ -122,9 +121,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             productTypeBeans = productTypeBeans,
             productDetailBeans = productDetailBeans
         )
-
-        // Print the parsed ProductApiResponse object
-        return productApiResponse
     }
 
     fun parseProductDetailBeans(jsonArray: JSONArray?): ArrayList<ProductDetailBean> {
@@ -149,7 +145,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 productType?.let {
                     val mediaType = it.optInt("media_type", 0)
                     val productImage = it.optString("product_image", "")
-                    result.add(ProductTypeBean(productImage, mediaType,""))
+                    val videoFrame = it.optString("video_frame","")
+                    result.add(ProductTypeBean(productImage, mediaType,videoFrame))
                 }
             }
         }
